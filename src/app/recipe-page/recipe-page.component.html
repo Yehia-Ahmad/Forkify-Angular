@@ -51,4 +51,20 @@
       </svg>
     </button>
   </div>
+
+  <div class="recipe__ingredients">
+    <h2 class="heading--2">Recipe ingredients</h2>
+    <ul class="recipe__ingredient-list">
+      <li class="recipe__ingredient" *ngFor="let item of ingredients">
+        <svg class="recipe__icon">
+          <use href="../../assets/icons.svg#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">{{ item.quantity }}</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">{{ item.unit }}</span>
+          {{ item.description }}
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
