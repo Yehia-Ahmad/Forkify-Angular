@@ -1,7 +1,6 @@
 import { BookmarkService } from './../Services/bookmark.service';
 import { Component } from '@angular/core';
 import recipe from '../../../recipe.json';
-// import recipeData from '../../../recipe.json';
 
 @Component({
   selector: 'app-recipe-page',
@@ -9,7 +8,7 @@ import recipe from '../../../recipe.json';
   styleUrls: ['./recipe-page.component.css'],
 })
 export class RecipePageComponent {
-  ingredients: any = recipe.data.recipe.ingredients;
+  ingredients: any = [];
   title: string = recipe.data.recipe.title;
   publisher: string = recipe.data.recipe.publisher;
   imageUrl: string = recipe.data.recipe.image_url;
@@ -20,7 +19,9 @@ export class RecipePageComponent {
   customRecipe: boolean = false;
   isFavorite: boolean = false;
 
-  constructor(private bookmarkService: BookmarkService) {}
+  constructor(private bookmarkService: BookmarkService) {
+    this.ingredients = recipe.data.recipe.ingredients;
+  }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -44,5 +45,24 @@ export class RecipePageComponent {
 
   addFavoriteHandler() {
     this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
+  }
+
+  decreamentServingsHandler() {
+    if (this.servings != 1) {
+      this.servings--;
+      this.ingredients.map((item: any) => {
+        if (item.quantity) {
+          item.quantity = item.quantity - 0.25;
+        }
+      });
+    }
+  }
+  increamentServingsHandler() {
+    this.servings++;
+    this.ingredients.map((item: any) => {
+      if (item.quantity) {
+        item.quantity = item.quantity + 0.25;
+      }
+    });
   }
 }
