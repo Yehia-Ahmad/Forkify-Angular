@@ -1,3 +1,4 @@
+import { BookmarkService } from './../Services/bookmark.service';
 import { Component } from '@angular/core';
 import recipe from '../../../recipe.json';
 // import recipeData from '../../../recipe.json';
@@ -16,31 +17,32 @@ export class RecipePageComponent {
   servings: number = recipe.data.recipe.servings;
   cookingTime: number = recipe.data.recipe.cooking_time;
 
-  // recipe: object = {
-  //   ingredients: recipeData.data.recipe.ingredients,
-  //   title: recipeData.data.recipe.title,
-  //   publisher: recipeData.data.recipe.publisher,
-  //   imageUrl: recipeData.data.recipe.image_url,
-  //   sourceUrl: recipeData.data.recipe.source_url,
-  //   servings: recipeData.data.recipe.servings,
-  //   cookingTime: recipeData.data.recipe.cooking_time,
-  // };
+  customRecipe: boolean = false;
+  isFavorite: boolean = false;
 
-  constructor() {
-    // this.recipe = {
-    //   ingredients: recipeData.data.recipe.ingredients,
-    //   title: recipeData.data.recipe.title,
-    //   publisher: recipeData.data.recipe.publisher,
-    //   imageUrl: recipeData.data.recipe.image_url,
-    //   sourceUrl: recipeData.data.recipe.source_url,
-    //   servings: recipeData.data.recipe.servings,
-    //   cookingTime: recipeData.data.recipe.cooking_time,
-    // };
-  }
+  constructor(private bookmarkService: BookmarkService) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log(this.ingredients);
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    const favoriteRecipe: any = {
+      title: recipe.data.recipe.title,
+      publisher: recipe.data.recipe.publisher,
+      imageUrl: recipe.data.recipe.image_url,
+    };
+
+    if (this.isFavorite) {
+      this.bookmarkService.FavoriteRecipes.push(favoriteRecipe);
+      console.log(this.bookmarkService.FavoriteRecipes);
+    }
+  }
+
+  addFavoriteHandler() {
+    this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
   }
 }

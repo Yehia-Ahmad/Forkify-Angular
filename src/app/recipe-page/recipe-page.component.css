@@ -168,3 +168,8 @@
 .recipe__publisher {
   font-weight: 700;
 }
+
+.recipe__details > .btn--bookmark {
+  position: absolute;
+  right: 40rem;
+}
