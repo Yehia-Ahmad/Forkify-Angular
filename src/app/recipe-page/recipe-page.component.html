@@ -1,1 +1,54 @@
-<p>recipe-page works!</p>
+<div class="recipe">
+  <figure class="recipe__fig">
+    <img [src]="imageUrl" [alt]="title" class="recipe__img" />
+    <h1 class="recipe__title">
+      <span>{{ title }}</span>
+    </h1>
+  </figure>
+
+  <div class="recipe__details">
+    <div class="recipe__info">
+      <svg class="recipe__info-icon">
+        <use href="../../assets/icons.svg#icon-clock"></use>
+      </svg>
+      <span class="recipe__info-data recipe__info-data--minutes">{{
+        cookingTime
+      }}</span>
+      <span class="recipe__info-text">minutes</span>
+    </div>
+    <div class="recipe__info">
+      <svg class="recipe__info-icon">
+        <use href="../../assets/icons.svg#icon-users"></use>
+      </svg>
+      <span class="recipe__info-data recipe__info-data--people">{{
+        servings
+      }}</span>
+      <span class="recipe__info-text">servings</span>
+    </div>
+    <div class="recipe__info-buttons">
+      <button class="btn--tiny btn--update-servings">
+        <svg>
+          <use href="../../assets/icons.svg#icon-minus-circle"></use>
+        </svg>
+      </button>
+      <button class="btn--tiny btn--update-servings">
+        <svg>
+          <use href="../../assets/icons.svg#icon-plus-circle"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="recipe__user-generated">
+      <svg>
+        <use href="../../assets/icons.svg#icon-user"></use>
+      </svg>
+    </div>
+    <button class="btn--round btn--bookmark">
+      <svg>
+        <use href="../../assets/icons.svg#icon-bookmark"></use>
+      </svg>
+      <svg *ngIf="false">
+        <use href="../../assets/icons.svg#icon-bookmark-fill"></use>
+      </svg>
+    </button>
+  </div>
+</div>
