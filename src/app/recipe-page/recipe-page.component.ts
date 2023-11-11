@@ -18,6 +18,7 @@ export class RecipePageComponent {
 
   customRecipe: boolean = false;
   isFavorite: boolean = false;
+  recipeIsLoaded: boolean = true;
 
   constructor(private bookmarkService: BookmarkService) {
     this.ingredients = recipe.data.recipe.ingredients;
@@ -26,6 +27,10 @@ export class RecipePageComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+
+    setTimeout(() => {
+      this.recipeIsLoaded = false;
+    }, 5 * 1000);
   }
 
   ngOnDestroy(): void {
