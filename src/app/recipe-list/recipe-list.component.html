@@ -1,1 +1,54 @@
-<p>recipe-list works!</p>
+<div class="search-results">
+  <ul class="results">
+    <li class="preview" *ngFor="let item of pages[curPage].page">
+      <!-- preview__link--active -->
+      <a class="preview__link" href="#23456">
+        <figure class="preview__fig">
+          <img [src]="item.image_url" [alt]="item.title" />
+        </figure>
+        <div class="preview__data">
+          <h4 class="preview__title">{{ item.title }}</h4>
+          <p class="preview__publisher">{{ item.publisher }}</p>
+          <!-- <div class="preview__user-generated">
+            <svg>
+              <use href="src/img/icons.svg#icon-user"></use>
+            </svg>
+          </div> -->
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="pagination">
+    <button
+      class="btn--inline pagination__btn--prev"
+      *ngIf="hidePagenationButtonPrev"
+      (click)="prevPageHandler()"
+    >
+      <svg class="search__icon">
+        <use href="../../assets/icons.svg#icon-arrow-left"></use>
+      </svg>
+      <span>Page {{ prevPage }}</span>
+    </button>
+    <button
+      class="btn--inline pagination__btn--next"
+      *ngIf="hidePagenationButtonNext"
+      (click)="nextPageHandler()"
+    >
+      <span>Page {{ nextPage }}</span>
+      <svg class="search__icon">
+        <use href="../../assets/icons.svg#icon-arrow-right"></use>
+      </svg>
+    </button>
+  </div>
+
+  <p class="copyright">
+    &copy; Copyright by
+    <a
+      class="twitter-link"
+      target="_blank"
+      href="https://www.linkedin.com/in/yahia-ahmed-2a8a26196/"
+      >Yehia Ahmed</a
+    >. Use for My portfolio.
+  </p>
+</div>
