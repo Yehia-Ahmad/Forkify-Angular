@@ -36,20 +36,21 @@ export class RecipePageComponent {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
+  }
+
+  addFavoriteHandler() {
+    this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
     const favoriteRecipe: any = {
       title: recipe.data.recipe.title,
       publisher: recipe.data.recipe.publisher,
       imageUrl: recipe.data.recipe.image_url,
+      id: recipe.data.recipe.id,
     };
 
     if (this.isFavorite) {
       this.bookmarkService.FavoriteRecipes.push(favoriteRecipe);
       console.log(this.bookmarkService.FavoriteRecipes);
     }
-  }
-
-  addFavoriteHandler() {
-    this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
   }
 
   decreamentServingsHandler() {

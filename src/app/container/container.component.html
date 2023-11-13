@@ -25,18 +25,18 @@
             <span>Add recipe</span>
           </button>
         </li>
-        <li class="nav__item">
-          <button
-            class="nav__btn nav__btn--bookmarks"
-            (mouseenter)="onMouseEnter()"
-            (mouseleave)="onMouseLeave()"
-          >
+        <li
+          class="nav__item"
+          (mouseenter)="onMouseEnter()"
+          (mouseleave)="onMouseLeave()"
+        >
+          <button class="nav__btn nav__btn--bookmarks">
             <svg class="nav__icon">
               <use href="../../assets/icons.svg#icon-bookmark"></use>
             </svg>
             <span>Bookmarks</span>
           </button>
-          <div class="bookmarks" *ngIf="displayBookmarkList">
+          <div class="bookmarks" *ngIf="displayBookmarkContainer">
             <ul class="bookmarks__list">
               <!-- make *ngIf to check if there is recipe exist -->
               <div class="message" *ngIf="displayErrorMassage">
@@ -49,17 +49,31 @@
               </div>
 
               <!-- make *ngFor to display recipes list -->
-              <!-- <li class="preview">
-                <a class="preview__link" href="#23456">
+
+              <li class="preview" *ngFor="let item of BookmarkList">
+                <a
+                  class="preview__link"
+                  href="#23456"
+                  (click)="openRecipeHandler($event)"
+                  [id]="item.id"
+                >
                   <figure class="preview__fig">
-                    <img src="src/img/test-1.jpg" alt="Test" />
+                    <img
+                      [src]="item.imgUrl"
+                      [alt]="item.title"
+                      [id]="item.id"
+                    />
                   </figure>
                   <div class="preview__data">
-                    <h4 class="preview__name">Pasta with Tomato Cream ...</h4>
-                    <p class="preview__author">The Pioneer Woman</p>
+                    <h4 class="preview__title" [id]="item.id">
+                      {{ item.title }}
+                    </h4>
+                    <p class="preview__publisher" [id]="item.id">
+                      {{ item.publisher }}
+                    </p>
                   </div>
                 </a>
-              </li> -->
+              </li>
             </ul>
           </div>
         </li>
