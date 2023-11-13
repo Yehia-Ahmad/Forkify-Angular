@@ -88,7 +88,7 @@
   text-transform: uppercase;
   font-weight: 600;
 }
-.preview__data__user-generated {
+.preview__user-generated {
   background-color: darken(var(--color-grey-light-2), 2%);
 
   display: flex;
@@ -101,7 +101,7 @@
   margin-left: auto;
   margin-right: 1.75rem;
 }
-.preview__data__user-generated > svg {
+.preview__user-generated > svg {
   height: 1.2rem;
   width: 1.2rem;
   fill: var(--color-primary);

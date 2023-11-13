@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import recipes from '../../../db.json';
+import recipe from '../../../recipe.json';
 
 @Component({
   selector: 'app-recipe-list',
@@ -8,11 +9,11 @@ import recipes from '../../../db.json';
 })
 export class RecipeListComponent {
   recipesList: any[];
-  arrayOfArrays: any[] = [];
-  pages: any[] = [];
+  Pages: any[] = [];
 
-  hidePagenationButtonPrev: boolean = false;
+  isUserGenerated: boolean = false;
   hidePagenationButtonNext: boolean = true;
+  hidePagenationButtonPrev: boolean = false;
 
   curPage: number = 0;
   prevPage: number = 0;
@@ -20,30 +21,27 @@ export class RecipeListComponent {
 
   constructor() {
     this.recipesList = recipes.recipes;
-    console.log(this.recipesList.length);
 
     var size = 10;
     for (var i = 0; i < this.recipesList.length; i += size) {
-      this.arrayOfArrays.push(this.recipesList.slice(i, i + size));
+      this.Pages.push(this.recipesList.slice(i, i + size));
     }
-    console.log(this.arrayOfArrays);
   }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.pages = this.arrayOfArrays.map((item, i) => {
-      return {
-        page: item,
-      };
-    });
-    console.log(this.pages.length);
+    // this.pages =
+  }
+
+  openRecipeHandler(item: any) {
+    console.log(item.target);
   }
 
   prevPageHandler() {
     if (this.curPage == 1) {
       this.hidePagenationButtonPrev = false;
-    } else if (this.curPage >= this.pages.length - 2) {
+    } else if (this.curPage >= this.Pages.length - 2) {
       this.hidePagenationButtonNext = true;
     }
     this.curPage--;
@@ -52,7 +50,7 @@ export class RecipeListComponent {
   }
 
   nextPageHandler() {
-    if (this.curPage == this.pages.length - 2) {
+    if (this.curPage == this.Pages.length - 2) {
       this.hidePagenationButtonNext = false;
     } else if (this.curPage >= 0) {
       this.hidePagenationButtonPrev = true;
