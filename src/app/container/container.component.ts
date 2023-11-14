@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import recipe from '../../../recipe.json';
 import { BookmarkService } from '../Services/bookmark.service';
+import { APIService } from '../Services/api.service';
 
 @Component({
   selector: 'app-container',
@@ -17,11 +18,19 @@ export class ContainerComponent {
   imgUrl: string = '';
   publisher: string = '';
   title: string = '';
-  id: number;
+  id: string;
+
+  public config: any;
+  items: any[] = [];
 
   BookmarkList: any[] = [];
 
-  constructor(private bookmarkService: BookmarkService) {}
+  constructor(
+    private bookmarkService: BookmarkService,
+    private api: APIService
+  ) {}
+
+  onSubmitHandler() {}
 
   onMouseEnter() {
     this.displayBookmarkContainer = true;
@@ -51,6 +60,10 @@ export class ContainerComponent {
   }
 
   openRecipeHandler(item: any) {
-    console.log(item.target.id);
+    this.api.getRecipe(item.target.id).subscribe((res: any) => {
+      this.config = res.data.recipe;
+      console.log(this.config);
+      this.bookmarkService.newRecipe.next(this.config);
+    });
   }
 }
