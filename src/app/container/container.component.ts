@@ -1,3 +1,4 @@
+import { DisplayRecipeService } from './../Services/display-recipe.service';
 import { Component } from '@angular/core';
 import recipe from '../../../recipe.json';
 import { BookmarkService } from '../Services/bookmark.service';
@@ -14,7 +15,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ContainerComponent {
   searchForm = new FormGroup({
-    searchInput: new FormControl('', Validators.required),
+    searchInput: new FormControl<string | null | undefined>(
+      '',
+      Validators.required
+    ),
   });
 
   displayBookmarkContainer: boolean = false;
@@ -32,15 +36,18 @@ export class ContainerComponent {
 
   constructor(
     private bookmarkService: BookmarkService,
+    private displayRecipeService: DisplayRecipeService,
     private api: APIService
   ) {}
 
   onSubmitHandler() {
-    console.log(this.searchForm.value.searchInput);
     let term = this.searchForm.value.searchInput;
     this.api.updateRecipeList(term).subscribe((res: any) => {
-      console.log(res.data.recipes);
+      let recipes = res.data.recipes;
+      this.displayRecipeService.newRecipeList.next(recipes);
     });
+    // this.searchForm.reset(this.searchForm.value);
+    this.searchForm.reset();
   }
 
   onMouseEnter() {

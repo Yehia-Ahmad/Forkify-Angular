@@ -1,3 +1,4 @@
+import { DisplayRecipeService } from './../Services/display-recipe.service';
 import { Component } from '@angular/core';
 import recipes from '../../../db.json';
 import recipe from '../../../recipe.json';
@@ -10,7 +11,7 @@ import { BookmarkService } from '../Services/bookmark.service';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent {
-  recipesList: any[];
+  recipesList: any;
   Pages: any[] = [];
 
   isUserGenerated: boolean = false;
@@ -24,20 +25,31 @@ export class RecipeListComponent {
 
   constructor(
     private api: APIService,
-    private bookmarkService: BookmarkService
-  ) {
-    this.recipesList = recipes.recipes;
-
-    var size = 10;
-    for (var i = 0; i < this.recipesList.length; i += size) {
-      this.Pages.push(this.recipesList.slice(i, i + size));
-    }
-  }
+    private bookmarkService: BookmarkService,
+    private displayRecipeService: DisplayRecipeService
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    // this.pages =
+    this.hidePagenationButtonNext = false;
+    this.displayRecipeService.newRecipeList.subscribe((res) => {
+      this.recipesList = res;
+      if (this.Pages.length == 0) {
+        this.hidePagenationButtonNext = false;
+      } else {
+        this.hidePagenationButtonNext = true;
+      }
+      this.sliceRecipeList(this.recipesList);
+    });
+  }
+
+  sliceRecipeList(arr: any[]) {
+    this.Pages.splice(0, this.Pages.length);
+    var size = 10;
+    for (var i = 0; i < arr.length; i += size) {
+      this.Pages.push(arr.slice(i, i + size));
+    }
   }
 
   openRecipeHandler(item: any) {
@@ -45,7 +57,6 @@ export class RecipeListComponent {
     this.api.getRecipe(item.target.id).subscribe((res: any) => {
       this.config = res;
       this.bookmarkService.newRecipe.next(this.config);
-      console.log(this.config);
     });
   }
 
