@@ -17,7 +17,7 @@ export class APIService {
   updateRecipePage() {}
 
   // GET recipes whose name contains search term
-  updateRecipeList(term: string): Observable<JSON> {
+  updateRecipeList(term?: String | null | undefined): Observable<JSON> {
     return this.httpClient.get<JSON>(
       `https://forkify-api.herokuapp.com/api/v2/recipes?search=${term}`
     );

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ContainerComponent } from './container/container.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeQuantityPipe } from './Pipe/recipe-quantity.pipe';
 
 @NgModule({
@@ -18,7 +18,13 @@ import { RecipeQuantityPipe } from './Pipe/recipe-quantity.pipe';
     RecipePageComponent,
     RecipeQuantityPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
