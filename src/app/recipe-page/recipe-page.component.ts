@@ -1,20 +1,14 @@
+import { config } from 'rxjs';
+import { APIService } from '../Services/api.service';
 import { BookmarkService } from './../Services/bookmark.service';
 import { Component, OnChanges } from '@angular/core';
-import recipe from '../../../recipe.json';
 
 @Component({
   selector: 'app-recipe-page',
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.css'],
 })
-export class RecipePageComponent implements OnChanges {
-  // ingredients: any = recipe.data.recipe.ingredients;
-  // title: string = recipe.data.recipe.title;
-  // publisher: string = recipe.data.recipe.publisher;
-  // imageUrl: string = recipe.data.recipe.image_url;
-  // sourceUrl: string = recipe.data.recipe.source_url;
-  // servings: number = recipe.data.recipe.servings;
-  // cookingTime: number = recipe.data.recipe.cooking_time;
+export class RecipePageComponent {
   item: any;
 
   displayRecipe: boolean = false;
@@ -22,7 +16,10 @@ export class RecipePageComponent implements OnChanges {
   isFavorite: boolean = false;
   recipeIsLoaded: boolean = true;
 
-  constructor(private bookmarkService: BookmarkService) {
+  constructor(
+    private bookmarkService: BookmarkService,
+    private api: APIService
+  ) {
     // this.ingredients = recipe.data.recipe.ingredients;
   }
 
@@ -33,10 +30,8 @@ export class RecipePageComponent implements OnChanges {
 
     this.bookmarkService.newRecipe.subscribe((config: any) => {
       this.displayRecipe = true;
+      this.isFavorite = false;
       this.item = config.data.recipe;
-      this.bookmarkService.FavoriteRecipes.map((item: any) => {
-        console.log('favorite Item: ' + item);
-      });
     });
 
     setTimeout(() => {
@@ -44,29 +39,21 @@ export class RecipePageComponent implements OnChanges {
     }, 100);
   }
 
-  ngOnChanges(): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-  }
-
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-  }
-
-  addFavoriteHandler() {
+  addFavoriteHandler(item: any) {
     this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
-    this.bookmarkService.newRecipe.subscribe((config: any) => {
+    console.log('recieved config from Bookmark icon: ', item.target.id);
+    let id = item.target.id;
+    this.api.getRecipe(id).subscribe((config: any) => {
       const favoriteRecipe: any = {
         title: config.data.recipe.title,
         publisher: config.data.recipe.publisher,
         imageUrl: config.data.recipe.image_url,
         id: config.data.recipe.id,
       };
-      console.log('recieved config from Bookmark icon: ', favoriteRecipe);
       if (this.isFavorite) {
         this.bookmarkService.FavoriteRecipes.push(favoriteRecipe);
       }
+      console.log(this.bookmarkService.FavoriteRecipes);
     });
   }
 

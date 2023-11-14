@@ -1,7 +1,5 @@
 import { DisplayRecipeService } from './../Services/display-recipe.service';
 import { Component } from '@angular/core';
-import recipes from '../../../db.json';
-import recipe from '../../../recipe.json';
 import { APIService } from '../Services/api.service';
 import { BookmarkService } from '../Services/bookmark.service';
 
@@ -35,12 +33,12 @@ export class RecipeListComponent {
     this.hidePagenationButtonNext = false;
     this.displayRecipeService.newRecipeList.subscribe((res) => {
       this.recipesList = res;
+      this.sliceRecipeList(this.recipesList);
       if (this.Pages.length == 0) {
         this.hidePagenationButtonNext = false;
       } else {
         this.hidePagenationButtonNext = true;
       }
-      this.sliceRecipeList(this.recipesList);
     });
   }
 

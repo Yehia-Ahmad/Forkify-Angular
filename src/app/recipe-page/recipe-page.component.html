@@ -51,7 +51,11 @@
           <use href="../../assets/icons.svg#icon-user"></use>
         </svg>
       </div>
-      <button class="btn--round btn--bookmark" (click)="addFavoriteHandler()">
+      <button
+        class="btn--round btn--bookmark"
+        [id]="item.id"
+        (click)="addFavoriteHandler($event)"
+      >
         <svg *ngIf="!isFavorite">
           <use href="../../assets/icons.svg#icon-bookmark"></use>
         </svg>
