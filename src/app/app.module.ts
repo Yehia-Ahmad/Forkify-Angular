@@ -9,6 +9,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeQuantityPipe } from './Pipe/recipe-quantity.pipe';
+import { OverleyModelComponent } from './overley-model/overley-model.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { RecipeQuantityPipe } from './Pipe/recipe-quantity.pipe';
     RecipeListComponent,
     RecipePageComponent,
     RecipeQuantityPipe,
+    OverleyModelComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
