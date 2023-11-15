@@ -51,7 +51,6 @@ export class RecipeListComponent {
   }
 
   openRecipeHandler(item: any) {
-    // console.log(item.target.id);
     this.api.getRecipe(item.target.id).subscribe((res: any) => {
       this.config = res;
       if (res != undefined) {
