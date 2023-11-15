@@ -1,3 +1,5 @@
-<!-- <div class="container"> -->
-<app-container></app-container>
-<!-- </div> -->
+<app-container (toggleValue)="showOverlyModel($event)"></app-container>
+<app-overley-model
+  (hideOverlyModel)="hideOverlyModel()"
+  *ngIf="displayOverlyModel"
+></app-overley-model>

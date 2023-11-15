@@ -19,7 +19,10 @@
     <nav class="nav">
       <ul class="nav__list">
         <li class="nav__item">
-          <button class="nav__btn nav__btn--add-recipe">
+          <button
+            class="nav__btn nav__btn--add-recipe"
+            (click)="openOverleyModelHandler($event)"
+          >
             <svg class="nav__icon">
               <use href="../../assets/icons.svg#icon-edit"></use>
             </svg>

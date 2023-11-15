@@ -5,4 +5,13 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {}
+export class AppComponent {
+  displayOverlyModel: boolean = false;
+
+  showOverlyModel($event: boolean) {
+    this.displayOverlyModel = true;
+  }
+  hideOverlyModel() {
+    this.displayOverlyModel = false;
+  }
+}

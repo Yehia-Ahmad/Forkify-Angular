@@ -1,5 +1,5 @@
 import { DisplayRecipeService } from './../Services/display-recipe.service';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BookmarkService } from '../Services/bookmark.service';
 import { APIService } from '../Services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +14,8 @@ import { map } from 'rxjs';
   ],
 })
 export class ContainerComponent {
+  @Output() toggleValue = new EventEmitter<boolean>();
+
   searchForm = new FormGroup({
     searchInput: new FormControl<string | null | undefined>(
       '',
@@ -39,6 +41,11 @@ export class ContainerComponent {
     private displayRecipeService: DisplayRecipeService,
     private api: APIService
   ) {}
+
+  openOverleyModelHandler(event: Event) {
+    event.preventDefault();
+    this.toggleValue.emit(true);
+  }
 
   onSubmitHandler() {
     let term = this.searchForm.value.searchInput;
