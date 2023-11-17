@@ -63,20 +63,22 @@ export class ContainerComponent {
     if (this.bookmarkService.FavoriteRecipes.length == 0) {
       this.displayErrorMassage = true;
     } else {
-      this.BookmarkList.splice(0, this.BookmarkList.length);
-      this.bookmarkService.FavoriteRecipes.map((item: any) => {
-        this.imgUrl = item.imageUrl;
-        this.publisher = item.publisher;
-        this.title = item.title;
-        this.id = item.id;
-      });
+      // this.BookmarkList.splice(0, this.BookmarkList.length);
+      // this.bookmarkService.FavoriteRecipes.map((item: any) => {
+      //   this.imgUrl = item.imageUrl;
+      //   this.publisher = item.publisher;
+      //   this.title = item.title;
+      //   this.id = item.id;
+      // });
 
-      this.BookmarkList.push({
-        imgUrl: this.imgUrl,
-        title: this.title,
-        publisher: this.publisher,
-        id: this.id,
-      });
+      this.BookmarkList = this.bookmarkService.FavoriteRecipes;
+
+      // this.BookmarkList.push({
+      //   imgUrl: this.imgUrl,
+      //   title: this.title,
+      //   publisher: this.publisher,
+      //   id: this.id,
+      // });
     }
   }
   onMouseLeave() {
