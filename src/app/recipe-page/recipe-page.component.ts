@@ -1,7 +1,6 @@
-import { config } from 'rxjs';
 import { APIService } from '../Services/api.service';
 import { BookmarkService } from './../Services/bookmark.service';
-import { Component, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-page',
@@ -15,6 +14,8 @@ export class RecipePageComponent {
   customRecipe: boolean = false;
   isFavorite: boolean = false;
   recipeIsLoaded: boolean = true;
+
+  title: string;
 
   constructor(
     private bookmarkService: BookmarkService,
@@ -31,7 +32,7 @@ export class RecipePageComponent {
     this.bookmarkService.newRecipe.subscribe((config: any) => {
       this.displayRecipe = true;
       this.isFavorite = false;
-      this.item = config.data.recipe;
+      this.item = config;
     });
 
     setTimeout(() => {
@@ -42,19 +43,13 @@ export class RecipePageComponent {
   addFavoriteHandler(item: any) {
     this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
     console.log('recieved config from Bookmark icon: ', item.target.id);
-    let id = item.target.id;
-    this.api.getRecipe(id).subscribe((config: any) => {
-      const favoriteRecipe: any = {
-        title: config.data.recipe.title,
-        publisher: config.data.recipe.publisher,
-        imageUrl: config.data.recipe.image_url,
-        id: config.data.recipe.id,
-      };
-      if (this.isFavorite) {
-        this.bookmarkService.FavoriteRecipes.push(favoriteRecipe);
-      }
+
+    let value = this.bookmarkService.newRecipe.getValue();
+    console.log(value);
+    if (this.isFavorite) {
+      this.bookmarkService.FavoriteRecipes.push(value);
       console.log(this.bookmarkService.FavoriteRecipes);
-    });
+    }
   }
 
   decreamentServingsHandler() {

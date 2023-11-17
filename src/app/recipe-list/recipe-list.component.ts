@@ -54,7 +54,7 @@ export class RecipeListComponent {
     this.api.getRecipe(item.target.id).subscribe((res: any) => {
       this.config = res;
       if (res != undefined) {
-        this.bookmarkService.newRecipe.next(this.config);
+        this.bookmarkService.newRecipe.next(this.config.data.recipe);
       }
     });
   }

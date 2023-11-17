@@ -11,7 +11,7 @@ export class APIService {
     return this.httpClient
       .get(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`)
       .pipe(
-        retry(25),
+        retry(3),
         catchError(async (res) => {
           console.log(res.status);
           alert('something Went wrong Please Try Again');
