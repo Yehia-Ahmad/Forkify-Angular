@@ -33,7 +33,6 @@ export class RecipePageComponent {
           return elme.title == config.title;
         }
       );
-      console.log(isIncludeInFavorite[0]);
       if (isIncludeInFavorite[0]) {
         this.isFavorite = true;
       } else {

@@ -53,7 +53,6 @@ export class ContainerComponent {
       let recipes = res.data.recipes;
       this.displayRecipeService.newRecipeList.next(recipes);
     });
-    // this.searchForm.reset(this.searchForm.value);
     this.searchForm.reset();
   }
 
@@ -89,7 +88,6 @@ export class ContainerComponent {
   openRecipeHandler(item: any) {
     this.api.getRecipe(item.target.id).subscribe((res: any) => {
       this.config = res.data.recipe;
-      console.log(this.config);
       this.bookmarkService.newRecipe.next(this.config);
     });
   }
