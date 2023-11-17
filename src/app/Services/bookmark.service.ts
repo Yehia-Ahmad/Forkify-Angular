@@ -7,6 +7,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class BookmarkService {
   FavoriteRecipes: any[] = [];
   // newRecipe: Subject<any[]> = new Subject();
-  newRecipe = new BehaviorSubject({});
+  newRecipe = new BehaviorSubject([]);
   constructor() {}
 }

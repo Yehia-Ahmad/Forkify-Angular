@@ -15,14 +15,10 @@ export class RecipePageComponent {
   isFavorite: boolean = false;
   recipeIsLoaded: boolean = true;
 
-  title: string;
-
   constructor(
     private bookmarkService: BookmarkService,
     private api: APIService
-  ) {
-    // this.ingredients = recipe.data.recipe.ingredients;
-  }
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -31,24 +27,38 @@ export class RecipePageComponent {
 
     this.bookmarkService.newRecipe.subscribe((config: any) => {
       this.displayRecipe = true;
-      this.isFavorite = false;
+
+      let isIncludeInFavorite = this.bookmarkService.FavoriteRecipes.map(
+        (elme: any) => {
+          return elme.title == config.title;
+        }
+      );
+      console.log(isIncludeInFavorite[0]);
+      if (isIncludeInFavorite[0]) {
+        this.isFavorite = true;
+      } else {
+        this.isFavorite = false;
+      }
+      if (config.length == 0) {
+        return;
+      }
       this.item = config;
     });
 
     setTimeout(() => {
       this.recipeIsLoaded = false;
-    }, 100);
+      this.displayRecipe = false;
+    }, 1000);
   }
 
-  addFavoriteHandler(item: any) {
-    this.isFavorite ? (this.isFavorite = false) : (this.isFavorite = true);
-    console.log('recieved config from Bookmark icon: ', item.target.id);
-
+  addFavoriteHandler() {
     let value = this.bookmarkService.newRecipe.getValue();
-    console.log(value);
-    if (this.isFavorite) {
+    if (!this.isFavorite) {
+      this.isFavorite = true;
       this.bookmarkService.FavoriteRecipes.push(value);
-      console.log(this.bookmarkService.FavoriteRecipes);
+    } else if (this.isFavorite) {
+      this.isFavorite = false;
+      this.bookmarkService.FavoriteRecipes.pop();
     }
   }
 

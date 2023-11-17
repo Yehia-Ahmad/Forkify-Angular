@@ -3,7 +3,7 @@
     <figure class="recipe__fig">
       <img [src]="item.image_url" [alt]="item.title" class="recipe__img" />
       <h1 class="recipe__title">
-        <span name="item.title">{{ item.title }}</span>
+        <span>{{ item.title }}</span>
       </h1>
     </figure>
 
@@ -54,7 +54,7 @@
       <button
         class="btn--round btn--bookmark"
         [id]="item.id"
-        (click)="addFavoriteHandler($event)"
+        (click)="addFavoriteHandler()"
       >
         <svg *ngIf="!isFavorite">
           <use href="../../assets/icons.svg#icon-bookmark"></use>
