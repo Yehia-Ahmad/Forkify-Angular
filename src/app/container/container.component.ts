@@ -1,5 +1,5 @@
 import { DisplayRecipeService } from './../Services/display-recipe.service';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BookmarkService } from '../Services/bookmark.service';
 import { APIService } from '../Services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { map } from 'rxjs';
     '../recipe-list/recipe-list.component.css',
   ],
 })
-export class ContainerComponent {
+export class ContainerComponent implements OnInit {
   @Output() toggleValue = new EventEmitter<boolean>();
 
   searchForm = new FormGroup({
@@ -40,7 +40,11 @@ export class ContainerComponent {
     private bookmarkService: BookmarkService,
     private displayRecipeService: DisplayRecipeService,
     private api: APIService
-  ) {}
+  ) { }
+
+  ngOnInit(): void {
+    this.updateRecipeListHandler('pizza');
+  }
 
   openOverleyModelHandler(event: Event) {
     event.preventDefault();
@@ -49,11 +53,15 @@ export class ContainerComponent {
 
   onSubmitHandler() {
     let term = this.searchForm.value.searchInput;
+    this.updateRecipeListHandler(term);
+    this.searchForm.reset();
+  }
+
+  updateRecipeListHandler(term: string | null | undefined) {
     this.api.updateRecipeList(term).subscribe((res: any) => {
       let recipes = res.data.recipes;
       this.displayRecipeService.newRecipeList.next(recipes);
     });
-    this.searchForm.reset();
   }
 
   onMouseEnter() {

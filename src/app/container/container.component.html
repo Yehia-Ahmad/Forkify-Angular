@@ -2,12 +2,8 @@
   <header class="header">
     <img src="../../assets/logo.png" alt="logo" class="header__logo" />
     <form class="search" [formGroup]="searchForm" (submit)="onSubmitHandler()">
-      <input
-        formControlName="searchInput"
-        type="text"
-        class="search__field"
-        placeholder="Search over 1,000,000 recipes..."
-      />
+      <input formControlName="searchInput" type="text" class="search__field"
+        placeholder="Search over 1,000,000 recipes..." />
       <button class="btn search__btn" [disabled]="!searchForm.valid">
         <svg class="search__icon">
           <use href="../../assets/icons.svg#icon-search"></use>
@@ -18,7 +14,7 @@
 
     <nav class="nav">
       <ul class="nav__list">
-        <li class="nav__item">
+        <!-- <li class="nav__item">
           <button
             class="nav__btn nav__btn--add-recipe"
             (click)="openOverleyModelHandler($event)"
@@ -28,12 +24,8 @@
             </svg>
             <span>Add recipe</span>
           </button>
-        </li>
-        <li
-          class="nav__item"
-          (mouseenter)="onMouseEnter()"
-          (mouseleave)="onMouseLeave()"
-        >
+        </li> -->
+        <li class="nav__item" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
           <button class="nav__btn nav__btn--bookmarks">
             <svg class="nav__icon">
               <use href="../../assets/icons.svg#icon-bookmark"></use>
@@ -55,18 +47,9 @@
               <!-- make *ngFor to display recipes list -->
 
               <li class="preview" *ngFor="let item of BookmarkList">
-                <a
-                  class="preview__link"
-                  href="#23456"
-                  (click)="openRecipeHandler($event)"
-                  [id]="item.id"
-                >
+                <a class="preview__link" href="#23456" (click)="openRecipeHandler($event)" [id]="item.id">
                   <figure class="preview__fig">
-                    <img
-                      [src]="item.image_url"
-                      [alt]="item.title"
-                      [id]="item.id"
-                    />
+                    <img [src]="item.image_url" [alt]="item.title" [id]="item.id" />
                   </figure>
                   <div class="preview__data">
                     <h4 class="preview__title" [id]="item.id">
