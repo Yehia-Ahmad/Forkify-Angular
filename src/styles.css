@@ -5,22 +5,29 @@
   --color-grad-1: #fbdb89;
   --color-grad-2: #f48982;
 
-  --color-grey-light-1: #f9f5f3; /* Light background*/
-  --color-grey-light-2: #f2efee; /* Light lines*/
-  --color-grey-light-3: #d3c7c3; /* Light text (placeholder)*/
-  --color-grey-dark-1: #615551; /* Normal text*/
-  --color-grey-dark-2: #918581; /* Lighter text*/
+  --color-grey-light-1: #f9f5f3;
+  /* Light background*/
+  --color-grey-light-2: #f2efee;
+  /* Light lines*/
+  --color-grey-light-3: #d3c7c3;
+  /* Light text (placeholder)*/
+  --color-grey-dark-1: #615551;
+  /* Normal text*/
+  --color-grey-dark-2: #918581;
+  /* Lighter text*/
 
-  --gradient: linear-gradient(
-    to right bottom,
-    var(--color-grad-1),
-    var(--color-grad-2)
-  );
+  --gradient: linear-gradient(to right bottom,
+      var(--color-grad-1),
+      var(--color-grad-2));
 
-  --bp-large: 78.15em; /* 1250px*/
-  --bp-medium: 61.25em; /* 980px*/
-  --bp-small: 37.5em; /* 600px*/
-  --bp-smallest: 31.25em; /* 500px*/
+  --bp-large: 78.15em;
+  /* 1250px*/
+  --bp-medium: 61.25em;
+  /* 980px*/
+  --bp-small: 37.5em;
+  /* 600px*/
+  --bp-smallest: 31.25em;
+  /* 500px*/
 }
 
 * {
@@ -70,6 +77,7 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
 .btn:hover {
   transform: scale(1.05);
 }
@@ -78,11 +86,11 @@ body {
   outline: none;
 }
 
-.btn > *:first-child {
+.btn>*:first-child {
   margin-right: 1rem;
 }
 
-.btn > svg {
+.btn>svg {
   height: 2.25rem;
   width: 2.25rem;
   fill: currentColor;
@@ -97,7 +105,7 @@ body {
   text-decoration: none;
 }
 
-.btn--small > svg {
+.btn--small>svg {
   height: 1.75rem;
   width: 1.75rem;
   fill: #fff;
@@ -117,14 +125,15 @@ body {
   align-items: center;
   transition: all 0.2s;
 }
-.btn--inline > svg {
+
+.btn--inline>svg {
   height: 1.6rem;
   width: 1.6rem;
   fill: currentColor;
   margin: 0 0.2rem;
 }
 
-.btn--inline > span {
+.btn--inline>span {
   margin: 0 0.4rem;
 }
 
@@ -151,6 +160,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .btn--round:hover {
   transform: scale(1.07);
 }
@@ -159,7 +169,7 @@ body {
   outline: none;
 }
 
-.btn--round > svg {
+.btn--round>svg {
   height: 2.5rem;
   width: 2.5rem;
   fill: #fff;
@@ -173,7 +183,7 @@ body {
   cursor: pointer;
 }
 
-.btn--tiny > svg {
+.btn--tiny>svg {
   fill: var(--color-primary);
   height: 100%;
   width: 100%;
@@ -218,7 +228,7 @@ body {
   text-align: center;
 }
 
-.spinner > svg {
+.spinner>svg {
   height: 6rem;
   width: 6rem;
   fill: var(--color-primary);
@@ -255,5 +265,32 @@ body {
     font-size: 1.8rem;
     line-height: 1.5;
     font-weight: 600;
+  }
+}
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-grad-1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grad-1);
+}
+
+.mozilla-style {
+  * {
+    scrollbar-color: var(--color-grad-1) transparent;
+    scrollbar-width: thin;
   }
 }

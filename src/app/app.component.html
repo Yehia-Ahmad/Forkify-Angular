@@ -1,5 +1,2 @@
-<app-container (toggleValue)="showOverlyModel($event)"></app-container>
-<app-overley-model
-  (hideOverlyModel)="hideOverlyModel()"
-  *ngIf="displayOverlyModel"
-></app-overley-model>
+<app-container (toggleValue)="showOverlyModel($event)" [ngClass]="{'mozilla-style': isChrome}"></app-container>
+<app-overley-model (hideOverlyModel)="hideOverlyModel()" *ngIf="displayOverlyModel"></app-overley-model>
